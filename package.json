@@ -1,0 +1,40 @@
+{
+  "name": "gulp-remindmetolive",
+  "description": "Gulp Asset Pipeline with Remindmetolive",
+  "engines": {
+    "node": "4.1.1",
+    "npm": "3.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/greypants/gulp-rails.git"
+  },
+  "scripts": {
+    "postinstall": "gulp"
+  },
+  "dependencies": {
+    "browser-sync": "latest",
+    "del": "latest",
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-changed": "latest",
+    "gulp-filesize": "latest",
+    "gulp-iconfont": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-notify": "latest",
+    "gulp-rename": "latest",
+    "gulp-rev": "latest",
+    "gulp-rev-collector": "latest",
+    "gulp-sass": "latest",
+    "gulp-sequence": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-swig": "latest",
+    "gulp-util": "latest",
+    "gulp-concat": "latest",
+    "watchify": "latest"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-watch": "latest"
+  }
+}

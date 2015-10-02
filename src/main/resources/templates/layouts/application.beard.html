@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{render "/includes/head" }}
+    <body>
+        {{render "/includes/header" }}
+        <div class="main">
+            {{ yield }}
+        </div>
+        {{render "/includes/footer" }}
+        {{render "/includes/scripts" }}
+    </body>
+</html>

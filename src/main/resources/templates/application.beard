@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--Meta-->
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="description" name="At Remindmetolive, we combine photography with storytelling. Let us help you shape and share your story with the world!" />
+    <meta content="keywords" name="photography, photos, story, stories, photographs, narratives, share, human, street, travel, cats" />
+    <title>Remindmetolive - Photos and Stories</title>
+    <link href="url" rel="canonical" />
+    <link rel="stylesheet" media="all" href="/assets/application.css" />
+    <!--Fonts-->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,900,300,700" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic" rel="stylesheet" />
+    <!--Icons/Glyphs-->
+    <link href="/assets/fontello.css" rel="stylesheet" />
+    <!--Favicon-->
+    <link href="/assets/favicon.ico" rel="shortcut icon" />
+    <!--HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js-->
+    <!--[if lt IE 9]
+script src="/assets/html5shiv.js"
+script src="/assets/respond.min.js"-->
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar-header">
+                <div class="container">
+                    <ul class="info pull-left">
+                        <li><a href="mailto:contact@remindmetolive.com"><i class="icon-mail-1 contact"></i>contact@remindmetolive.com</a>
+                        </li>
+                    </ul>
+                    <ul class="social pull-right">
+                        <li><a href="https://www.facebook.com/remindmetolive" target="_blank"><i class="icon-s-facebook"></i></a>
+                        </li>
+                        <li><a href="https://www.twitter.com/remindmetolive" target="_blank"><i class="icon-s-twitter"></i></a>
+                        </li>
+                        <li><a href="https://instagram.com/remindmetolive/" target="_blank"><i class="icon-s-instagram"></i></a>
+                        </li>
+                    </ul>
+                    <a class="navbar-brand" href="/"><img alt="" class="logo mobile-logo" src="/assets/logo.svg" />
+                    </a>
+                    <!--============================================================= LOGO MOBILE : END =============================================================--><a class="btn responsive-menu pull-right" data-target=".navbar-collapse" data-toggle="collapse"><i class="icon-menu-1"></i></a>
+                </div>
+            </div>
+            <div class="yamm">
+                <div class="navbar-collapse collapse">
+                    <div class="container">
+                        <!--============================================================= LOGO =============================================================-->
+                        <a class="navbar-brand" href="/"><img alt="" class="logo desktop-logo" src="/assets/logo-100.png" />
+                        </a>
+                        <!--============================================================= LOGO : END =============================================================-->
+                        <!--============================================================= MAIN NAVIGATION =============================================================-->
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown"><a href="/">Home</a>
+                            </li>
+                            <li class="dropdown"><a href="/stories/">Stories</a>
+                            </li>
+                            <li class="dropdown"><a href="/streets-of-berlin/">Streets of Berlin</a>
+                            </li>
+                            <li class="dropdown"><a href="/cats/">Cats</a>
+                            </li>
+                            <li class="dropdownˆ"><a href="/about/">About</a>
+                            </li>
+                            <li class="dropdown"><a href="/contact/">Contact</a>
+                            </li>
+                        </ul>
+                        <!--============================================================= MAIN NAVIGATION : END =============================================================-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!--============================================================= SECTION – HERO =============================================================-->
+        <section id="hero">
+            <div class="owl-carousel height-lg owl-inner-nav owl-ui-lg" id="owl-main">
+                <div class="item" style="background-image: url(http://static.remindmetolive.com/images/stories/2015-09-29-lunar-landscapes-of-lanzarote/teaser-02-1600.jpg);">
+                    <div class="container">
+                        <div class="caption vertical-top text-right">
+                            <h1 class="fadeInRight-1 light-color stroke-1">Lanzarote Lunar Landscape</h1>
+                            <p class="fadeInRight-2 light-color"><span class="navy-bg">What makes this island special are the vulcanos and the apocalyptic landscapes</span>
+                            </p>
+                            <div class="fadeInRight-3"><a class="btn btn-large" href="/stories/lunar-landscapes-of-lanzarote.html">Discover Lanzarote</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="background-image: url(http://static.remindmetolive.com/images/stories/2015-09-30-love-at-the-gardens-of-the-world/teaser-01-1600.jpg);">
+                    <div class="container">
+                        <div class="caption vertical-top text-left">
+                            <h1 class="fadeInDown-1 light-color stroke-1">Love At The Gardens Of The World</h1>
+                            <p class="fadeInDown-2 light-color"><span class="navy-bg">A beautiful green place in Berlin</span>
+                            </p>
+                            <div class="fadeInDown-3"><a class="btn btn-large" href="/stories/love-at-the-gardens-of-the-world.html"> Take a look</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="background-image: url(http://static.remindmetolive.com/images/cats/2015-09-30-shumy-is-one-year-old/teaser1600.jpg);">
+                    <div class="container">
+                        <div class="caption vertical-bottom text-right">
+                            <h1 class="fadeInLeft-1 light-color stroke-1">Shumy Is One</h1>
+                            <p class="fadeInLeft-2 light-color"><span class="gray-bg">Take a look at Shumy and other cute kitties, in our Cats section!</span>
+                            </p>
+                            <div class="fadeInLeft-3"><a class="btn btn-large" href="/cats/">See the Cats</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="background-image: url(http://static.remindmetolive.com/images/streets-of-berlin/2015-09-29-teufelsberg/teaser1600.jpg);">
+                    <div class="container">
+                        <div class="caption vertical-top text-right">
+                            <h1 class="fadeIn-1 light-color stroke-1">Streets of Berlin</h1>
+                            <p class="fadeIn-2 light-color"><span class="navy-bg">Discover the wonderful people on the streets of Berlin.</span>
+                                <br /><span class="navy-bg">Find out why Berlin is considered one of the most cosmoplite cities in the world!</span>
+                            </p>
+                            <div class="fadeIn-3"><a class="btn btn-large" href="/streets-of-berlin/"> Discover Berlin</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="background-image: url(http://static.remindmetolive.com/images/contact/teaser1600.jpg);">
+                    <div class="container">
+                        <div class="caption vertical-bottom text-center">
+                            <h1 class="fadeInDown-1 light-color stroke-1 yellow">Do you like what you see?</h1>
+                            <p class="fadeInDown-2 light-color blue"><span class="gray-bg">We are always open to feedback!</span>
+                            </p>
+                            <div class="fadeInDown-3"><a class="btn btn-large" href="/contact/">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--============================================================= SECTION – HERO : END =============================================================-->
+        <!--============================================================= SECTION – WHO WE ARE =============================================================-->
+        <section id="who-we-are">
+            <div class="container inner-top inner-bottom-sm">
+                <div class="row">
+                    <div class="col-md-8 col-sm-9 center-block text-center">
+                        <header>
+                            <h1>Stories. Adventure. Feelings.</h1>
+                            <p> <strong>Remind Me To Live</strong> is a project born from our passion for photography and stories. It's our way of sharing our optimistic point of view about life. It's our way of showing that life is beautiful and share our feelings about it.</p>
+                        </header>
+                    </div>
+                </div>
+                <div class="row inner-top-sm">
+                    <div class="col-md-1">
+                        <div class="icon pull-right"><i class="icon-heart-empty-1 icn"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-3 inner-bottom-xs">
+                        <h2>Passion</h2>
+                        <p class="text-small">We are passionate about photography and stories. We enjoy every bit of our work and we want to share our passion with you!</p>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="icon pull-right"><i class="icon-lamp icn"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-3 inner-bottom-xs">
+                        <h2>Creativity</h2>
+                        <p class="text-small">We always challenge ourselves to come up with new ideas and new projects. We try to look at the world with fresh eyes, to discover new perspectives and to share that with you.</p>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="icon pull-right"><i class="icon-star-empty-1 icn"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-3 inner-bottom-xs">
+                        <h2>Quality</h2>
+                        <p class="text-small">We don't like compromises on quality! From our daily jobs we learned that quality is not negociable and we strive to create excellent work!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--============================================================= SECTION – WHO WE ARE : END =============================================================-->
+        <!--============================================================= SECTION – LATEST WORKS =============================================================-->
+        <section class="light-bg" id="latest-works">
+            <div class="container inner">
+                <div class="row">
+                    <div class="col-md-8 col-sm-9 center-block text-center">
+                        <header>
+                            <h1>Check out our latest stories</h1>
+                            <p>Beautiful places! Interesting people! Our every day lives and culture!</p>
+                        </header>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 inner-top-sm">
+                        <figure>
+                            <div class="icon-overlay icn-link">
+                                <a href="/stories/lanzarote-lunar-landscape.html"><img alt="" src="http://static.remindmetolive.com/images/stories/2015-09-29-lunar-landscapes-of-lanzarote/teaser-01-800.jpg" />
+                                </a>
+                            </div>
+                            <figcaption class="bordered no-top-border">
+                                <div class="info">
+                                    <h3><a href="/stories/lunar-landscapes-of-lanzarote.html"> Lunar Landscapes of Lanzarote</a></h3>
+                                    <p>Travel</p>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-sm-6 inner-top-sm">
+                        <figure>
+                            <div class="icon-overlay icn-link">
+                                <a href="/stories/gardens-of-the-world.html"><img alt="" src="http://static.remindmetolive.com/images/stories/2015-09-30-love-at-the-gardens-of-the-world/teaser-01-800.jpg" />
+                                </a>
+                            </div>
+                            <figcaption class="bordered no-top-border">
+                                <div class="info">
+                                    <h3><a href="/stories/love-at-the-gardens-of-the-world.html"> Love at the Gardens Of The World</a></h3>
+                                    <p>Berlin</p>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="row inner-top-sm">
+                    <div class="owl-carousel owl-item-gap" id="owl-latest-works">
+                        <div class="item">
+                            <a href="/streets-of-berlin/resting-in-mauerpark.html">
+                                <figure>
+                                    <figcaption class="text-overlay">
+                                        <div class="info">
+                                            <h4>Resting in Mauerpark</h4>
+                                            <p>Streets Of Berlin</p>
+                                        </div>
+                                    </figcaption><img alt="" src="http://static.remindmetolive.com/images/streets-of-berlin/2015-09-30-resting-in-mauerpark/teaser400.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="/cats/whitey.html">
+                                <figure>
+                                    <figcaption class="text-overlay">
+                                        <div class="info">
+                                            <h4>Whitey</h4>
+                                            <p>Cats</p>
+                                        </div>
+                                    </figcaption><img alt="" src="http://static.remindmetolive.com/images/cats/2015-09-29-whitey/teaser400.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="/streets-of-berlin/teufelsberg.html">
+                                <figure>
+                                    <figcaption class="text-overlay">
+                                        <div class="info">
+                                            <h4>Teufelsberg</h4>
+                                            <p>Streets Of Berlin</p>
+                                        </div>
+                                    </figcaption><img alt="" src="http://static.remindmetolive.com/images/streets-of-berlin/2015-09-29-teufelsberg/teaser400.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="/cats/shumy-is-one-year-old.html">
+                                <figure>
+                                    <figcaption class="text-overlay">
+                                        <div class="info">
+                                            <h4>Shumy Is One Year Old</h4>
+                                            <p>Cats</p>
+                                        </div>
+                                    </figcaption><img alt="" src="http://static.remindmetolive.com/images/cats/2015-09-30-shumy-is-one-year-old/teaser400.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="/about/">
+                                <figure>
+                                    <figcaption class="text-overlay">
+                                        <div class="info">
+                                            <h4>Who we are</h4>
+                                            <p>Find out something about us</p>
+                                        </div>
+                                    </figcaption><img alt="" src="http://static.remindmetolive.com/images/about/teaser400.jpg" />
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--============================================================= SECTION – LATEST WORKS : END =============================================================-->
+        <!--============================================================= SECTION – GET IN TOUCH =============================================================-->
+        <section id="get-in-touch">
+            <div class="container inner">
+                <div class="row">
+                    <div class="col-md-8 col-sm-9 center-block text-center">
+                        <header>
+                            <h1>Do you like our stories?</h1>
+                            <p>We would like to hear from you!</p>
+                        </header><a class="btn btn-large" href="/contact/">Get in touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--============================================================= SECTION – GET IN TOUCH : END =============================================================-->
+    </main>
+    <footer class="dark-bg">
+        <div class="container inner">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 inner">
+                    <h4>Who we are</h4>
+                    <a href="/"><img alt="" class="logo img-intext logo-bottom" src="/assets/logo-white-75.png" />
+                    </a>
+                    <p><strong>Remind Me To Live</strong> is the way we contribute to the large, funny and poignant human story. We do this through photograpy and narratives.</p><a class="txt-btn" href="/about/"> More about us</a>
+                </div>
+                <div class="col-md-4 col-sm-6 inner">
+                    <h4>Latest works</h4>
+                    <div class="row thumbs gap-xs">
+                        <div class="col-xs-6 thumb">
+                            <figure class="icon-overlay icn-link">
+                                <a href="/stories/gardens-of-the-world.html"><img alt="" src="http://static.remindmetolive.com/images/stories/2015-09-30-love-at-the-gardens-of-the-world/teaser-01-400.jpg" />
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-xs-6 thumb">
+                            <figure class="icon-overlay icn-link">
+                                <a href="/streets-of-berlin/resting-in-mauerpark.html"><img alt="" src="http://static.remindmetolive.com/images/streets-of-berlin/2015-09-30-resting-in-mauerpark/teaser400.jpg" />
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-xs-6 thumb">
+                            <figure class="icon-overlay icn-link">
+                                <a href="/streets-of-berlin/teufelsberg.html"><img alt="" src="http://static.remindmetolive.com/images/streets-of-berlin/2015-09-29-teufelsberg/teaser400.jpg" />
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-xs-6 thumb">
+                            <figure class="icon-overlay icn-link">
+                                <a href="/cats/shumy-is-one-year-old.html"><img alt="" src="http://static.remindmetolive.com/images/cats/2015-09-30-shumy-is-one-year-old/teaser400.jpg" />
+                                </a>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 inner">
+                    <h4>Get In Touch</h4>
+                    <p>Be part of the journey and share your thoughts about our project. Tell us your story. We would love to hear from you.</p>
+                    <ul class="contacts">
+                        <li><i class="icon-location contact"></i>Berlin, 10405</li>
+                        <li><a href="mailto:contact@remindmetolive.com"><i class="icon-mail-1 contact"></i>contact@remindmetolive.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container inner">
+                <p class="pull-left">© 2015 remindmetolive All rights reserved.</p>
+                <ul class="footer-menu pull-right">
+                    <li><a href="/">Home</a>
+                    </li>
+                    <li><a href="/stories/">Stories</a>
+                    </li>
+                    <li><a href="/streets-of-berlin/">Streets of Berlin</a>
+                    </li>
+                    <li><a href="/cats/">Cats</a>
+                    </li>
+                    <li><a href="/about/">About</a>
+                    </li>
+                    <li><a href="/contact/">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/application.js"></script>
+    <!--OnScroll CSS3 Animations for Modern Browsers and IE10+-->
+    <!--[if !IE]-->
+    <script src="/assets/onscroll.js"></script>
+    <!--<![endif]-->
+</body>
+
+</html>
