@@ -22,27 +22,12 @@ object Main extends App {
   PostMetas
   CategoryMetas
 
-  val pathHandler = Handlers.path().addExactPath("/status", new HttpHandler {
-    override def handleRequest(exchange: HttpServerExchange) = exchange.dispatch(StaticRoutesHandlers.helloHandler)
-  }).addExactPath("/index", new HttpHandler {
-    override def handleRequest(exchange: HttpServerExchange) = exchange.dispatch(StaticRoutesHandlers.indexHandler)
-  }).addExactPath("/beard", new HttpHandler {
-    override def handleRequest(exchange: HttpServerExchange) = exchange.dispatch(StaticRoutesHandlers.beardHandler)
-  }).addPrefixPath("/assets", resource(new PathResourceManager(Paths.get("/Users/dpersa/prog/scala/remindmetolive-scala/target/assets"), 100)).setDirectoryListingEnabled(true))
-    .addPrefixPath("/aaa", new PathTemplateHandler() {
-  }.add("{category}/{post}", new HttpHandler {
-    override def handleRequest(exchange: HttpServerExchange) = exchange.dispatch(StaticRoutesHandlers.defaultHandler)
-  })).addPrefixPath("/", new PredicateHandler(Predicates.and(Predicates.suffix(".html"), Predicates.parse("path-template[value=\"/{category}/{username}\"]")), new HttpHandler {
-    override def handleRequest(exchange: HttpServerExchange) = exchange.dispatch(StaticRoutesHandlers.defaultHandler)
-  }, new HttpHandler {
-    override def handleRequest(exchange: HttpServerExchange) = exchange.dispatch(StaticRoutesHandlers.defaultHandler1)
-  }))
-  //    .addPrefixPath("/", new HttpHandler {
-  //    override def handleRequest(exchange: HttpServerExchange) = {
-  //      logger.debug("Dispatch to the routing handler")
-  //      //exchange.dispatch(routingHandler)
-  //    }
-  //  })
+  val pathHandler = Handlers.path().addExactPath("/status", DelegatingHandler(StaticRoutesHandlers.helloHandler))
+    .addExactPath("/beard", DelegatingHandler(StaticRoutesHandlers.beardHandler))
+    .addPrefixPath("/assets", resource(new PathResourceManager(Paths.get("/Users/dpersa/prog/scala/remindmetolive-scala/target/assets"), 100)).setDirectoryListingEnabled(true))
+    .addPrefixPath("/", new PredicateHandler(Predicates.and(Predicates.suffix(".html"), Predicates.parse("path-template[value=\"/{category}/{username}\"]")),
+    DelegatingHandler(StaticRoutesHandlers.defaultHandler)
+    , DelegatingHandler(StaticRoutesHandlers.defaultHandler1)))
 
   val server = Undertow.builder
     .addHttpListener(8080, "0.0.0.0")

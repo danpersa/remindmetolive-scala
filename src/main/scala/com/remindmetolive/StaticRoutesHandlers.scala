@@ -31,15 +31,6 @@ object StaticRoutesHandlers {
     }
   }
 
-  def indexHandler = new HttpHandler {
-
-    val html = scala.io.Source.fromFile("/Users/dpersa/prog/scala/remindmetolive-scala/assets/index.html").mkString
-
-    def handleRequest(exchange: HttpServerExchange) = {
-      exchange.getResponseSender.send(html)
-    }
-  }
-
   def defaultHandler = new HttpHandler {
     def handleRequest(exchange: HttpServerExchange) = {
       println("XXXX AAA1 MATCH")
