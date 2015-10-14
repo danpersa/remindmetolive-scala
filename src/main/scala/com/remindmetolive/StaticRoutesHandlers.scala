@@ -1,5 +1,9 @@
 package com.remindmetolive
 
+import java.io.StringWriter
+
+import com.mitchellbosecke.pebble.PebbleEngine
+import com.mitchellbosecke.pebble.loader.ClasspathLoader
 import de.zalando.beard.renderer.{ClasspathTemplateLoader, CustomizableTemplateCompiler, BeardTemplateRenderer, DefaultTemplateCompiler, MonifuRenderResult, TemplateName}
 import io.undertow.server.{HttpHandler, HttpServerExchange}
 import io.undertow.util.HttpString
@@ -13,6 +17,12 @@ import scala.concurrent.Future
  * @author dpersa
  */
 object StaticRoutesHandlers {
+
+  val statusHandler = new HttpHandler {
+    override def handleRequest(exchange: HttpServerExchange) = {
+      exchange.getResponseSender.send("Hello World")
+    }
+  }
 
   val helloHandler = new HttpHandler {
     def handleRequest(exchange: HttpServerExchange) = {
@@ -45,20 +55,28 @@ object StaticRoutesHandlers {
   }
 
   val templateName = "/home/send-contact"
-  val compiler = new CustomizableTemplateCompiler(templateLoader = new ClasspathTemplateLoader("/templates", ".beard.html"))
-  val renderer = new BeardTemplateRenderer(compiler)
-  val compiledTemplate = compiler.compile(TemplateName(templateName)).get
+  val context = Map("title" -> "title XXX",
+    "takeLook" -> "Take a Look XXX",
+    "stories" -> "Stories.",
+    "whoWeAre" -> "Who we are XXX",
+    "getInTouch" -> "Get In Touch XXX",
+    "berlin" -> "Berlin XXX")
 
+  val indexHandler = DelegatingHandler(BeardTemplateHandler("/home/index", Map.empty))
 
-  val beardHandler = new HttpHandler {
+  val beardHandler = new BeardTemplateHandler(templateName, context)
 
-    def handleRequest(exchange: HttpServerExchange) = {
+  case class BeardTemplateHandler(val templateName: String, context: Map[String, Any]) extends HttpHandler {
+
+    val compiler = new CustomizableTemplateCompiler(templateLoader = new ClasspathTemplateLoader("/templates", ".beard.html"))
+    val renderer = new BeardTemplateRenderer(compiler)
+    val compiledTemplate = compiler.compile(TemplateName(templateName)).get
+
+    override def handleRequest(exchange: HttpServerExchange) = {
+
       val renderResult = new MonifuRenderResult()
-      //val renderResult = new StringWriterRenderResult()
 
-      val result = renderer.render(compiledTemplate, renderResult,
-        Map("title" -> "title XXX", "takeLook" -> "Take a Look XXX", "stories" -> "Stories.", "whoWeAre" -> "Who we are XXX",
-          "getInTouch" -> "Get In Touch XXX", "berlin" -> "Berlin XXX"))
+      val result = renderer.render(compiledTemplate, renderResult, context)
 
       exchange.getResponseHeaders().add(new HttpString("Content-Type"), "text/html")
       exchange.startBlocking()
@@ -74,10 +92,30 @@ object StaticRoutesHandlers {
           Future(Continue)
         }
       })
+    }
+  }
 
-      //      result.foreach { (res: String) =>
-      //        exchange.getOutputStream.write(res.getBytes)
-      //      }
+  val pebbleHandler = new PebbleTemplateHandler(templateName, context)
+
+  case class PebbleTemplateHandler(val templateName: String, context: Map[String, AnyRef]) extends HttpHandler {
+
+    val loader = new ClasspathLoader()
+    loader.setSuffix(".beard.html")
+    loader.setPrefix("pebble")
+
+    val engine = new PebbleEngine(loader)
+    val template = engine.getTemplate(templateName)
+
+    override def handleRequest(exchange: HttpServerExchange) = {
+
+      val sr = new StringWriter()
+
+      template.evaluate(sr)
+
+
+      exchange.getResponseHeaders().add(new HttpString("Content-Type"), "text/html")
+      exchange.startBlocking()
+      exchange.getOutputStream.write(sr.toString().getBytes())
     }
   }
 }

@@ -3,6 +3,7 @@ package com.remindmetolive
 import java.io.StringReader
 import java.nio.file.Paths
 
+import com.remindmetolive.StaticRoutesHandlers.BeardTemplateHandler
 import io.undertow.Handlers._
 import io.undertow.predicate.Predicates
 import io.undertow.server.handlers.{PredicateHandler, PathTemplateHandler}
@@ -22,10 +23,14 @@ object Main extends App {
   PostMetas
   CategoryMetas
 
-  val pathHandler = Handlers.path().addExactPath("/status", DelegatingHandler(StaticRoutesHandlers.helloHandler))
+  val pathHandler = Handlers.path().addExactPath("/status", StaticRoutesHandlers.statusHandler)
+    .addExactPath("/", DelegatingHandler(BeardTemplateHandler("/home/index", Map.empty)))
+    .addExactPath("/about", DelegatingHandler(BeardTemplateHandler("/home/about", Map.empty)))
+    .addExactPath("/contact", DelegatingHandler(BeardTemplateHandler("/home/contact", Map.empty)))
     .addExactPath("/beard", DelegatingHandler(StaticRoutesHandlers.beardHandler))
+    .addExactPath("/pebble", DelegatingHandler(StaticRoutesHandlers.pebbleHandler))
     .addPrefixPath("/assets", resource(new PathResourceManager(Paths.get("/Users/dpersa/prog/scala/remindmetolive-scala/target/assets"), 100)).setDirectoryListingEnabled(true))
-    .addPrefixPath("/", new PredicateHandler(Predicates.and(Predicates.suffix(".html"), Predicates.parse("path-template[value=\"/{category}/{username}\"]")),
+    .addPrefixPath("/", new PredicateHandler(Predicates.and(Predicates.suffix(".html"), Predicates.parse("path-template(value=\"/{category}/{username}\")")),
     DelegatingHandler(StaticRoutesHandlers.defaultHandler)
     , DelegatingHandler(StaticRoutesHandlers.defaultHandler1)))
 
