@@ -1,19 +1,9 @@
 package com.remindmetolive
 
-import java.io.StringWriter
-
-import com.mitchellbosecke.pebble.PebbleEngine
-import com.mitchellbosecke.pebble.loader.ClasspathLoader
-import com.remindmetolive.handler.{BeardTemplateHandler, PebbleTemplateHandler, DelegatingHandler}
-import de.zalando.beard.renderer.{ClasspathTemplateLoader, CustomizableTemplateCompiler, BeardTemplateRenderer, DefaultTemplateCompiler, MonifuRenderResult, TemplateName}
+import com.remindmetolive.handler.{BeardTemplateHandler, PebbleTemplateHandler}
+import io.undertow.server.handlers.BlockingHandler
 import io.undertow.server.{HttpHandler, HttpServerExchange}
 import io.undertow.util.HttpString
-import monifu.concurrent.Implicits.globalScheduler
-import monifu.reactive.Ack.Continue
-import monifu.reactive.{Ack, Observer}
-
-import scala.collection.parallel.Splitter
-import scala.concurrent.Future
 
 /**
  * @author dpersa
@@ -75,12 +65,11 @@ object StaticRoutesHandlers {
     "getInTouch" -> "Get In Touch XXX",
     "berlin" -> "Berlin XXX")
 
-  val indexHandler = DelegatingHandler(BeardTemplateHandler("/home/index", Map.empty))
+  val indexHandler = new BlockingHandler(BeardTemplateHandler("/home/index", Map.empty))
 
   val beardHandler = BeardTemplateHandler(templateName, context)
 
 
 
   val pebbleHandler = new PebbleTemplateHandler(templateName, context)
-
 }

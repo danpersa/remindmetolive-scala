@@ -14,15 +14,11 @@ object BeardTemplateService {
 
   private val compiler = new CustomizableTemplateCompiler(templateLoader = new ClasspathTemplateLoader("/templates", ".beard.html"))
 
-  private def createCache(): Cache[String, BeardTemplate] = {
-    CacheBuilder
-      .newBuilder()
-      .initialCapacity(100)
-      .concurrencyLevel(10)
-      .build()
-  }
-
-  private val cache = createCache()
+  private val cache: Cache[String, BeardTemplate] = CacheBuilder
+    .newBuilder()
+    .initialCapacity(100)
+    .concurrencyLevel(10)
+    .build()
 
   val renderer = new BeardTemplateRenderer(compiler)
 
