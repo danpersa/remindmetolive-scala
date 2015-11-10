@@ -7,12 +7,12 @@ import scala.io.Source
 import scala.collection.immutable.Map
 
 /**
- * @author dpersa
- */
+  * @author dpersa
+  */
 object PostMetas {
-  val logger = LoggerFactory.getLogger(this.getClass)
+  private val logger = LoggerFactory.getLogger(this.getClass)
 
-  var temp = Map[String, Map[String, PostMeta]]()
+  private var temp = Map[String, Map[String, PostMeta]]()
 
   def init() {
     for (category <- Source.fromInputStream(this.getClass.getResourceAsStream("/templates/posts")).getLines()) {
@@ -57,4 +57,18 @@ object PostMetas {
 
 case class PostMeta(key: String, category: String, title: String, author: String,
                     keywords: String, description: String, tags: String, pictureUrl: String,
-                    status: String, publishDate: String, intro: String)
+                    status: String, publishDate: String, intro: String) {
+  val toMap = Map(
+    "key" -> key,
+    "category" -> category,
+    "title" -> title,
+    "author" -> author,
+    "keywords" -> keywords,
+    "description" -> description,
+    "tags" -> tags,
+    "pictureUrl" -> pictureUrl,
+    "status" -> status,
+    "publishDate" -> publishDate,
+    "intro" -> intro
+  )
+}

@@ -1,6 +1,6 @@
-package com.remindmetolive
+package com.remindmetolive.handler
 
-import io.undertow.server.{HttpServerExchange, HttpHandler}
+import io.undertow.server.{HttpHandler, HttpServerExchange}
 
 /**
  * @author dpersa

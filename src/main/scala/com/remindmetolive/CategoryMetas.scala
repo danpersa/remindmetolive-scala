@@ -7,8 +7,8 @@ import scala.io.Source
 import scala.collection.immutable.Map
 
 /**
- * @author dpersa
- */
+  * @author dpersa
+  */
 object CategoryMetas {
   val logger = LoggerFactory.getLogger(this.getClass)
 
@@ -38,4 +38,13 @@ object CategoryMetas {
   logger.debug(s"Category Metas: $metas")
 }
 
-case class CategoryMeta(key: String, title: String, keywords: String, description: String)
+case class CategoryMeta(key: String, title: String, keywords: String, description: String) {
+  def toMap = {
+    Map(
+      "key" -> key,
+      "title" -> title,
+      "keywords" -> keywords,
+      "description" -> description
+    )
+  }
+}

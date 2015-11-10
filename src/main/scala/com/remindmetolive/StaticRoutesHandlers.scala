@@ -4,6 +4,7 @@ import java.io.StringWriter
 
 import com.mitchellbosecke.pebble.PebbleEngine
 import com.mitchellbosecke.pebble.loader.ClasspathLoader
+import com.remindmetolive.handler.{BeardTemplateHandler, PebbleTemplateHandler, DelegatingHandler}
 import de.zalando.beard.renderer.{ClasspathTemplateLoader, CustomizableTemplateCompiler, BeardTemplateRenderer, DefaultTemplateCompiler, MonifuRenderResult, TemplateName}
 import io.undertow.server.{HttpHandler, HttpServerExchange}
 import io.undertow.util.HttpString
@@ -11,6 +12,7 @@ import monifu.concurrent.Implicits.globalScheduler
 import monifu.reactive.Ack.Continue
 import monifu.reactive.{Ack, Observer}
 
+import scala.collection.parallel.Splitter
 import scala.concurrent.Future
 
 /**
@@ -41,16 +43,27 @@ object StaticRoutesHandlers {
     }
   }
 
-  def defaultHandler = new HttpHandler {
+  val defaultHandler = new HttpHandler {
+
+    val postPattern = "/(.+)/(.+).html".r
+
     def handleRequest(exchange: HttpServerExchange) = {
-      println("XXXX AAA1 MATCH")
+
+      val postPattern(categoryUrlKey, postUrlKey) = exchange.getRequestURI
+
+
+      val postMeta = PostMetas.metas(categoryUrlKey)(postUrlKey)
+      val template = s"/posts/$categoryUrlKey/${postMeta.publishDate}-$postUrlKey"
+
+      //println(s"Post with category: $categoryUrlKey and url key: $postUrlKey and template: $template")
+
+      BeardTemplateHandler(template, postMeta.toMap).handleRequest(exchange)
     }
   }
 
-
   def defaultHandler1 = new HttpHandler {
     def handleRequest(exchange: HttpServerExchange) = {
-      println("XXXX AAA2 FAIL")
+      println(s"XXXX AAA2 FAIL ${exchange.getRequestURI}")
     }
   }
 
@@ -64,58 +77,10 @@ object StaticRoutesHandlers {
 
   val indexHandler = DelegatingHandler(BeardTemplateHandler("/home/index", Map.empty))
 
-  val beardHandler = new BeardTemplateHandler(templateName, context)
+  val beardHandler = BeardTemplateHandler(templateName, context)
 
-  case class BeardTemplateHandler(val templateName: String, context: Map[String, Any]) extends HttpHandler {
 
-    val compiler = new CustomizableTemplateCompiler(templateLoader = new ClasspathTemplateLoader("/templates", ".beard.html"))
-    val renderer = new BeardTemplateRenderer(compiler)
-    val compiledTemplate = compiler.compile(TemplateName(templateName)).get
-
-    override def handleRequest(exchange: HttpServerExchange) = {
-
-      val renderResult = new MonifuRenderResult()
-
-      val result = renderer.render(compiledTemplate, renderResult, context)
-
-      exchange.getResponseHeaders().add(new HttpString("Content-Type"), "text/html")
-      exchange.startBlocking()
-      exchange.dispatch()
-
-      result.subscribe(new Observer[String] {
-        override def onError(ex: Throwable): Unit = ???
-
-        override def onComplete(): Unit = exchange.endExchange()
-
-        override def onNext(elem: String): Future[Ack] = {
-          exchange.getOutputStream.write(elem.getBytes)
-          Future(Continue)
-        }
-      })
-    }
-  }
 
   val pebbleHandler = new PebbleTemplateHandler(templateName, context)
 
-  case class PebbleTemplateHandler(val templateName: String, context: Map[String, AnyRef]) extends HttpHandler {
-
-    val loader = new ClasspathLoader()
-    loader.setSuffix(".beard.html")
-    loader.setPrefix("pebble")
-
-    val engine = new PebbleEngine(loader)
-    val template = engine.getTemplate(templateName)
-
-    override def handleRequest(exchange: HttpServerExchange) = {
-
-      val sr = new StringWriter()
-
-      template.evaluate(sr)
-
-
-      exchange.getResponseHeaders().add(new HttpString("Content-Type"), "text/html")
-      exchange.startBlocking()
-      exchange.getOutputStream.write(sr.toString().getBytes())
-    }
-  }
 }

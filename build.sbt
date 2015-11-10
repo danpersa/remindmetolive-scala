@@ -12,10 +12,11 @@ scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf
 
 libraryDependencies ++= {
   Seq(
-    "io.undertow"              % "undertow-core"                          % "1.3.0.CR2",
+    "io.undertow"              % "undertow-core"                          % "1.3.5.Final",
     "ch.qos.logback"           % "logback-classic"                        % "1.1.3",
     "com.typesafe"             % "config"                                 % "1.3.0",
     "de.zalando.spearheads"   %% "beard"                                  % "0.0.3-SNAPSHOT",
+    "com.google.code.findbugs" % "jsr305"                                 % "1.3.9",
     "com.mitchellbosecke"      % "pebble"                                 % "1.6.0",
 
     // test stuff
