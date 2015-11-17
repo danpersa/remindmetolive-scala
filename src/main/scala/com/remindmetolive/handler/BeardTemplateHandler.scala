@@ -1,7 +1,7 @@
 package com.remindmetolive.handler
 
-import com.remindmetolive.{CategoryMetas, PostMetas}
 import com.remindmetolive.service.BeardTemplateService
+import com.remindmetolive.{CategoryMetas, PageMetas, PostMetas}
 import de.zalando.beard.renderer._
 import io.undertow.server.{HttpHandler, HttpServerExchange}
 import io.undertow.util.HttpString
@@ -64,6 +64,36 @@ object PostTemplateHandler extends TemplateHandler {
 
     TemplateContext(templateName = s"/posts/$categoryUrlKey/${postMeta.publishDate}-$postUrlKey",
       model = postMeta.toMap)
+  }
+}
+
+case class IndexTemplateHandler(val pageMetas: PageMetas) extends PageKeyTemplateHandler {
+  override def pageKey(exchange: HttpServerExchange): String = "index"
+}
+
+trait PageKeyTemplateHandler extends TemplateHandler {
+
+  def pageMetas: PageMetas
+
+  def pageKey(exchange: HttpServerExchange): String
+
+  override def templateContext(exchange: HttpServerExchange): TemplateContext = {
+
+    val key = pageKey(exchange)
+
+    val metas = pageMetas.getMetas(key)
+
+    TemplateContext(templateName = s"/home/$key",
+      model = metas)
+  }
+}
+
+case class PageTemplateHandler(val pageMetas: PageMetas) extends PageKeyTemplateHandler {
+  private val homePagePattern = "/(.+)/".r
+
+  override def pageKey(exchange: HttpServerExchange): String = {
+    val homePagePattern(pageKey) = exchange.getRequestURI
+    pageKey
   }
 }
 

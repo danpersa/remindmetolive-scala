@@ -2,7 +2,7 @@ package com.remindmetolive
 
 import java.nio.file.Paths
 
-import com.remindmetolive.handler.{CategoryTemplateHandler, PostTemplateHandler, BeardTemplateHandler}
+import com.remindmetolive.handler._
 import io.undertow.Handlers._
 import io.undertow.predicate.Predicates
 import io.undertow.server.handlers.{BlockingHandler, PredicateHandler}
@@ -19,11 +19,14 @@ object Main extends App {
 
   PostMetas
   CategoryMetas
+  val homePageMetas = PageMetas("templates/home")
+  val homePageTemplateHandler = PageTemplateHandler(homePageMetas)
+
 
   val pathHandler = Handlers.path().addExactPath("/status", StaticRoutesHandlers.statusHandler)
-    .addExactPath("/", new BlockingHandler(BeardTemplateHandler("/home/index", Map.empty)))
-    .addExactPath("/about", new BlockingHandler(BeardTemplateHandler("/home/about", Map.empty)))
-    .addExactPath("/contact", new BlockingHandler(BeardTemplateHandler("/home/contact", Map.empty)))
+    .addExactPath("/", new BlockingHandler(IndexTemplateHandler(homePageMetas)))
+    .addExactPath("/about", new BlockingHandler(homePageTemplateHandler))
+    .addExactPath("/contact", new BlockingHandler(homePageTemplateHandler))
     .addExactPath("/stories", new BlockingHandler(CategoryTemplateHandler))
     .addExactPath("/streets-of-berlin", new BlockingHandler(CategoryTemplateHandler))
     .addExactPath("/cats", new BlockingHandler(CategoryTemplateHandler))
