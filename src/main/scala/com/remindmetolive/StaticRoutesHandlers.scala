@@ -71,5 +71,5 @@ object StaticRoutesHandlers {
 
 
 
-  val pebbleHandler = new PebbleTemplateHandler(templateName, context)
+ // val pebbleHandler = new PebbleTemplateHandler(templateName, context)
 }

@@ -7,7 +7,7 @@ watchify = require('watchify');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 
-gulp.task('default', ['compile-sass', 'compile-scss', 'css', 'js', 'images']);
+gulp.task('default', ['compile-sass', 'compile-scss', 'css', 'js', 'images', 'templates']);
 
 gulp.task('watch', ['watch-sass', 'watch-scss']);
 
@@ -71,6 +71,13 @@ gulp.task('js', function () {
         .pipe(concat("application.js"))
         .pipe(sourcemaps.write("."))
         .pipe(gulp.dest("target/assets"))
+});
+
+gulp.task('templates', function () {
+    gulp.src([
+          'assets/templates/**'
+      ])
+      .pipe(gulp.dest("target/assets/templates"))
 });
 
 gulp.task('images', function () {

@@ -3,7 +3,6 @@ package com.remindmetolive.service
 import java.util.concurrent.Callable
 
 import com.google.common.cache.{CacheBuilder, Cache}
-import com.sun.tools.javac.resources.compiler
 import de.zalando.beard.ast.BeardTemplate
 import de.zalando.beard.renderer.{TemplateName, BeardTemplateRenderer, ClasspathTemplateLoader, CustomizableTemplateCompiler}
 

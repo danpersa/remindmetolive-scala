@@ -1,27 +1,38 @@
 package com.remindmetolive
 
+import java.io.File
+import java.net.URL
+
+import com.google.common.cache.{Cache, CacheBuilder}
 import com.typesafe.config.ConfigFactory
 import org.slf4j.LoggerFactory
 
 import scala.io.Source
 import scala.collection.immutable.Map
+import scala.collection.immutable.Seq
 
 /**
   * @author dpersa
   */
-object PostMetas {
+object PostMetas
+//  extends MetaService
+{
   private val logger = LoggerFactory.getLogger(this.getClass)
 
   private var temp = Map[String, Map[String, PostMeta]]()
 
+  //private val cache: Cache[String, Map[String, Any]] = new CacheBuilder[String, Map[String, Any]]().build()
+
+  private def categoryDirs(category: String): Seq[String] = Assets.assetsSubdir(s"templates/posts/$category")
+
   def init() {
-    for (category <- Source.fromInputStream(this.getClass.getResourceAsStream("/templates/posts")).getLines()) {
+    for (category <- Assets.postDirs) {
       for {
-        postFileName <- Source.fromInputStream(this.getClass.getResourceAsStream(s"/templates/posts/$category")).getLines()
+        postFileName <- categoryDirs(category)
         if postFileName != "category.conf"
         if postFileName.endsWith(".conf")
       } {
-        val config = ConfigFactory.load(s"templates/posts/$category/$postFileName")
+        val config = ConfigFactory.parseFile(new File(s"${Assets.assetsDir}/templates/posts/$category/$postFileName"))
         val key = config.getString("url_key")
 
         val meta = PostMeta(
@@ -53,6 +64,8 @@ object PostMetas {
   val metas = temp
 
   logger.debug(s"Post Metas: $metas")
+
+  //override def getMetas(key: String): Map[String, Any] = ???
 }
 
 case class PostMeta(key: String, category: String, title: String, author: String,

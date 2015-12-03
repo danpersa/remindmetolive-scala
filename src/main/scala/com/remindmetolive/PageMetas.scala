@@ -1,7 +1,7 @@
 package com.remindmetolive
 
 import java.util.concurrent.Callable
-
+import java.io.File
 import com.google.common.cache.{Cache, CacheBuilder}
 import com.typesafe.config.ConfigFactory
 import org.slf4j.LoggerFactory
@@ -19,7 +19,7 @@ case class PageMetas(val configDir: String) extends MetaService {
   override def getMetas(key: String): Map[String, Any] = {
     cache.get(key, new Callable[Map[String, Any]] {
       override def call(): Map[String, Any] = {
-        val config = ConfigFactory.load(s"$configDir/$key.conf")
+        val config = ConfigFactory.parseFile(new File(s"${Assets.assetsDir}/$configDir/$key.conf"))
         PageMeta(
           key = key,
           title = config.getString("title"),

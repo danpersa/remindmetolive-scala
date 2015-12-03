@@ -21,7 +21,7 @@ libraryDependencies ++= {
 
     // test stuff
     "org.scalatest"           %% "scalatest"                              % "3.0.0-M1"       % "test",
-    "org.scalamock"           %% "scalamock-scalatest-support"            % "3.2.2"       % "test"
+    "org.scalamock"           %% "scalamock-scalatest-support"            % "3.2.2"          % "test"
   )
 }
 enablePlugins(JavaAppPackaging)

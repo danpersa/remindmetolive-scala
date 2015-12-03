@@ -2,8 +2,7 @@ package com.remindmetolive
 
 import com.typesafe.config.ConfigFactory
 import org.slf4j.LoggerFactory
-
-import scala.io.Source
+import java.io.File
 import scala.collection.immutable.Map
 
 /**
@@ -15,8 +14,8 @@ object CategoryMetas {
   var temp = Map[String, CategoryMeta]()
 
   def init() {
-    for (category <- Source.fromInputStream(this.getClass.getResourceAsStream("/templates/posts")).getLines()) {
-      val config = ConfigFactory.load(s"templates/posts/$category/category.conf")
+    for (category <- Assets.postDirs) {
+      val config = ConfigFactory.parseFile(new File(s"${Assets.assetsDir}/templates/posts/$category/category.conf"))
 
       val meta = CategoryMeta(
         key = category,
