@@ -21,60 +21,35 @@
         <div class="row">
             <div class="col-md-9 center-block">
                 <div class="posts sidemeta">
+                    {{ for postMeta in postMetas }}
                     <div class="post format-image">
                         <div class="date-wrapper">
                             <div class="date">
-                                <span class="day">30</span><span class="month">Sep</span>
+                                <span class="day">{{ postMeta.day }}</span><span class="month">{{ postMeta.month }}</span>
                             </div>
                         </div>
                         <div class="post-content">
                             <figure class="icn-link post-media">
-                                <a href="/cats/shumy-is-one-year-old.html"><img alt="" src="/images/cats/2015-09-30-shumy-is-one-year-old/image.jpg" /></a>
+                                <a href="{{ postMeta.postUrl }}"><img alt="" src="{{ postMeta.categoryImageUrl }}" /></a>
                             </figure>
                             <p class="author">
-                                <a data-placement="left" data-rel="tooltip" href="#" title="Post author">by Dan</a>
+                                <a data-placement="left" data-rel="tooltip" href="#" title="Post author">by {{ postMeta.author }}</a>
                             </p>
-                            <h2 class="post-title">
-                                <a href="/cats/shumy-is-one-year-old.html"> Shumy Is One Year Old</a>
-                            </h2>
+                            <h1 class="post-title">
+                                <a href="{{ postMeta.postUrl }}">{{postMeta.title}}</a>
+                            </h1>
                             <ul class="meta">
                                 <li class="categories">
-                                    <a href='#'>cat</a>,&nbsp;<a href='#'>kitty</a>,&nbsp;<a href='#'>cute</a>,&nbsp;<a href='#'>pet</a>
+                                    {{render "/partials/tag-list" tagsList=postMeta.tagsList }}
                                 </li>
                             </ul>
                             <p>
-                                Shumy is our cat. In her passport, she&#39;s a British Short Hair. But we can all see the long hair she has.
+                                {{ postMeta.intro }}
                             </p>
-                            <a class="btn" href="/cats/shumy-is-one-year-old.html"> Read more</a>
+                            <a class="btn" href="{{ postMeta.postUrl }}"> Read more</a>
                         </div>
                     </div>
-                    <div class="post format-image">
-                        <div class="date-wrapper">
-                            <div class="date">
-                                <span class="day">29</span><span class="month">Sep</span>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            <figure class="icn-link post-media">
-                                <a href="/cats/whitey.html"><img alt="" src="/images/cats/2015-09-29-whitey/image800.jpg" /></a>
-                            </figure>
-                            <p class="author">
-                                <a data-placement="left" data-rel="tooltip" href="#" title="Post author">by Dan</a>
-                            </p>
-                            <h2 class="post-title">
-                                <a href="/cats/whitey.html"> Whitey</a>
-                            </h2>
-                            <ul class="meta">
-                                <li class="categories">
-                                    <a href='#'>cat</a>,&nbsp;<a href='#'>kitty</a>,&nbsp;<a href='#'>cute</a>,&nbsp;<a href='#'>pet</a>
-                                </li>
-                            </ul>
-                            <p>
-                                Whitey is Cheetah&#39;s son. Cheetah is our friend&#39;s cat and we took care of them while they were out of town.
-                            </p>
-                            <a class="btn" href="/cats/whitey.html"> Read more</a>
-                        </div>
-                    </div>
+                    {{/for}}
                 </div>
             </div>
         </div>

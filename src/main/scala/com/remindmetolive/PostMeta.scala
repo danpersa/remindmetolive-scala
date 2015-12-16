@@ -74,8 +74,9 @@ object PostMetas {
       override def call(): Seq[Map[String, Any]] = {
         metas(categoryUrlKey).values
           .filter(_.status == "published")
-          .map(postMeta => postMeta.toMap)
           .toList
+          .sorted(Ordering.by((_: PostMeta).publishDate).reverse)
+          .map(_.toMap)
       }
     })
   }
