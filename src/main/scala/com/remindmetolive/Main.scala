@@ -50,7 +50,7 @@ object Main extends App {
     .addHttpListener(8080, "0.0.0.0")
     .setIoThreads(400)
     .setWorkerThreads(400)
-    .setHandler(pathHandler)
+    .setHandler(gzipHandler)
     .build
   server.start
 }

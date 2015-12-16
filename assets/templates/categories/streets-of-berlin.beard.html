@@ -21,87 +21,35 @@
         <div class="row">
             <div class="col-md-9 center-block">
                 <div class="posts sidemeta">
+                    {{ for postMeta in postMetas }}
                     <div class="post format-image">
                         <div class="date-wrapper">
                             <div class="date">
-                                <span class="day">8</span><span class="month">Nov</span>
+                                <span class="day">{{ postMeta.day }}</span><span class="month">{{ postMeta.month }}</span>
                             </div>
                         </div>
                         <div class="post-content">
                             <figure class="icn-link post-media">
-                                <a href="/streets-of-berlin/selfie-in-charlottenburg.html"><img alt="" src="/images/streets-of-berlin/2015-11-08-selfie-in-charlottenburg/image-01-1200.jpg" /></a>
+                                <a href="{{ postMeta.postUrl }}"><img alt="" src="{{ postMeta.categoryImageUrl }}" /></a>
                             </figure>
                             <p class="author">
-                                <a data-placement="left" data-rel="tooltip" href="#" title="Post author">by Dan</a>
+                                <a data-placement="left" data-rel="tooltip" href="#" title="Post author">by {{ postMeta.author }}</a>
                             </p>
                             <h1 class="post-title">
-                                <a href="/streets-of-berlin/selfie-in-charlottenburg.html"> Selfie in Charlottenburg</a>
+                                <a href="{{ postMeta.postUrl }}">{{postMeta.title}}</a>
                             </h1>
                             <ul class="meta">
                                 <li class="categories">
-                                    <a href='#'>street-photography</a>,&nbsp;<a href='#'>selfie</a>,&nbsp;<a href='#'>portrait</a>,&nbsp;<a href='#'>charlottenburg</a>,&nbsp;<a href='#'>berlin</a>
+                                    {{render "/partials/tag-list" tagsList=postMeta.tagsList }}
                                 </li>
                             </ul>
                             <p>
-                                Autumn is the best season when it comes to colors. One of the best places in Berlin to witness autumn is the Charlottenburg Park.
+                                {{ postMeta.intro }}
                             </p>
-                            <a class="btn" href="/streets-of-berlin/selfie-in-charlottenburg.html"> Read more</a>
+                            <a class="btn" href="{{ postMeta.postUrl }}"> Read more</a>
                         </div>
                     </div>
-                    <div class="post format-image">
-                        <div class="date-wrapper">
-                            <div class="date">
-                                <span class="day">30</span><span class="month">Sep</span>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            <figure class="icn-link post-media">
-                                <a href="/streets-of-berlin/resting-in-mauerpark.html"><img alt="" src="/images/streets-of-berlin/2015-09-30-resting-in-mauerpark/teaser.jpg" /></a>
-                            </figure>
-                            <p class="author">
-                                <a data-placement="left" data-rel="tooltip" href="#" title="Post author">by Ade</a>
-                            </p>
-                            <h1 class="post-title">
-                                <a href="/streets-of-berlin/resting-in-mauerpark.html"> Resting in Mauerpark</a>
-                            </h1>
-                            <ul class="meta">
-                                <li class="categories">
-                                    <a href='#'>street-photography</a>,&nbsp;<a href='#'>portrait</a>,&nbsp;<a href='#'>mauerpark</a>,&nbsp;<a href='#'>berlin</a>
-                                </li>
-                            </ul>
-                            <p>
-                                We were walking around Mauerpark as it was a music festival there. Looking around, I saw an interesting guy, resting. I didn&#39;t hesitate, I took the camera from Dan and shoot this picture!
-                            </p>
-                            <a class="btn" href="/streets-of-berlin/resting-in-mauerpark.html"> Read more</a>
-                        </div>
-                    </div>
-                    <div class="post format-image">
-                        <div class="date-wrapper">
-                            <div class="date">
-                                <span class="day">29</span><span class="month">Sep</span>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            <figure class="icn-link post-media">
-                                <a href="/streets-of-berlin/teufelsberg.html"><img alt="" src="/images/streets-of-berlin/2015-09-29-teufelsberg/image.jpg" /></a>
-                            </figure>
-                            <p class="author">
-                                <a data-placement="left" data-rel="tooltip" href="#" title="Post author">by Dan</a>
-                            </p>
-                            <h1 class="post-title">
-                                <a href="/streets-of-berlin/teufelsberg.html"> Teufelsberg</a>
-                            </h1>
-                            <ul class="meta">
-                                <li class="categories">
-                                    <a href='#'>street-photography</a>,&nbsp;<a href='#'>portrait</a>,&nbsp;<a href='#'>teufelsberg</a>,&nbsp;<a href='#'>berlin</a>
-                                </li>
-                            </ul>
-                            <p>
-                                I took this picture on a warm summer day, on a guided tour at Teufelsberg. For the ones who don&#39;t know, Teufelsberg is a deserted radar near Berlin. Teufelsberg literally means The Mountains of the Devil in German.
-                            </p>
-                            <a class="btn" href="/streets-of-berlin/teufelsberg.html"> Read more</a>
-                        </div>
-                    </div>
+                    {{/for}}
                 </div>
             </div>
         </div>

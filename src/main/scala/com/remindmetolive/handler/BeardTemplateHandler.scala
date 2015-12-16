@@ -1,10 +1,7 @@
 package com.remindmetolive.handler
 
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-
-import com.remindmetolive.service.BeardTemplateService
 import com.remindmetolive._
+import com.remindmetolive.service.BeardTemplateService
 import de.zalando.beard.renderer._
 import io.undertow.server.{HttpHandler, HttpServerExchange}
 import io.undertow.util.HttpString
@@ -13,7 +10,6 @@ import monifu.reactive.Ack.Continue
 import monifu.reactive.{Ack, Observer}
 
 import scala.concurrent.Future
-import scala.collection.immutable.Seq
 
 /**
   * @author dpersa
@@ -59,34 +55,14 @@ class BeardTemplateHandler(templateContext: TemplateContext) extends TemplateHan
 
 object PostTemplateHandler extends TemplateHandler {
   private val postPattern = "/(.+)/(.+).html".r
-  private val monthFormatter = DateTimeFormatter.ofPattern("MMM")
-  private val dayFormatter = DateTimeFormatter.ofPattern("dd")
-
-  private def createModel(postMeta: PostMeta, postPath: String) = {
-
-    val date = LocalDate.parse(postMeta.publishDate, DateTimeFormatter.ISO_LOCAL_DATE)
-
-    // TODO in prod, we don't need /assets
-    val imageUrl = s"/assets/images/$postPath/${postMeta.imageName}"
-
-    postMeta.toMap
-      .updated("day", dayFormatter.format(date))
-      .updated("month", monthFormatter.format(date))
-      .updated("tagsList", postMeta.tags.split(",").toSeq.map { tag =>
-        Map("name" -> tag)
-      }.toList)
-      .updated("imageUrl", imageUrl)
-  }
 
   override def templateContext(exchange: HttpServerExchange): TemplateContext = {
     val postPattern(categoryUrlKey, postUrlKey) = exchange.getRequestURI
-    val postMeta = PostMetas.metas(categoryUrlKey)(postUrlKey)
-
-    val postPath = s"$categoryUrlKey/${postMeta.publishDate}-$postUrlKey"
-    val model = createModel(postMeta, postPath)
+    val postMeta = PostMetas.byCategoryAndUrlKey(categoryUrlKey, postUrlKey)
+    val postPath = s"$categoryUrlKey/${postMeta("publishDate")}-$postUrlKey"
 
     TemplateContext(templateName = s"/posts/$postPath",
-      model = model)
+      model = postMeta)
   }
 }
 
@@ -123,13 +99,21 @@ case class PageTemplateHandler(val pageMetas: PageMetas) extends PageKeyTemplate
 object CategoryTemplateHandler extends TemplateHandler {
   private val categoryPattern = "/(.+)/".r
 
+  private def createModel(categoryUrlKey: String) = {
+    val categoryMeta = CategoryMetas.metas(categoryUrlKey)
+    val postMetas = PostMetas.publishedForCategory(categoryUrlKey)
+
+    categoryMeta.toMap
+      .updated("postMetas", postMetas)
+  }
+
   override def templateContext(exchange: HttpServerExchange): TemplateContext = {
     val categoryPattern(categoryUrlKey) = exchange.getRequestURI
-    val categoryMeta = CategoryMetas.metas(categoryUrlKey)
 
+    val model = createModel(categoryUrlKey)
 
     TemplateContext(templateName = s"/categories/$categoryUrlKey",
-      model = categoryMeta.toMap)
+      model = model)
   }
 }
 
