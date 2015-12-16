@@ -45,9 +45,9 @@ object StaticRoutesHandlers {
       val postMeta = PostMetas.metas(categoryUrlKey)(postUrlKey)
       val template = s"/posts/$categoryUrlKey/${postMeta.publishDate}-$postUrlKey"
 
-      //println(s"Post with category: $categoryUrlKey and url key: $postUrlKey and template: $template")
+      println(s"Post with category: $categoryUrlKey and url key: $postUrlKey and template: $template")
 
-      BeardTemplateHandler(template, postMeta.toMap).handleRequest(exchange)
+      BeardTemplateHandler(template, model = postMeta.toMap).handleRequest(exchange)
     }
   }
 
@@ -67,9 +67,7 @@ object StaticRoutesHandlers {
 
   val indexHandler = new BlockingHandler(BeardTemplateHandler("/home/index", Map.empty))
 
-  val beardHandler = BeardTemplateHandler(templateName, context)
-
-
-
- // val pebbleHandler = new PebbleTemplateHandler(templateName, context)
+//  val beardHandler = BeardTemplateHandler(templateName, context)
+//
+  val pebbleHandler = new PebbleTemplateHandler(templateName, context)
 }

@@ -1,7 +1,10 @@
 package com.remindmetolive.handler
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 import com.remindmetolive.service.BeardTemplateService
-import com.remindmetolive.{CategoryMetas, PageMetas, PostMetas}
+import com.remindmetolive._
 import de.zalando.beard.renderer._
 import io.undertow.server.{HttpHandler, HttpServerExchange}
 import io.undertow.util.HttpString
@@ -10,7 +13,7 @@ import monifu.reactive.Ack.Continue
 import monifu.reactive.{Ack, Observer}
 
 import scala.concurrent.Future
-import scala.util.matching.Regex
+import scala.collection.immutable.Seq
 
 /**
   * @author dpersa
@@ -56,14 +59,34 @@ class BeardTemplateHandler(templateContext: TemplateContext) extends TemplateHan
 
 object PostTemplateHandler extends TemplateHandler {
   private val postPattern = "/(.+)/(.+).html".r
+  private val monthFormatter = DateTimeFormatter.ofPattern("MMM")
+  private val dayFormatter = DateTimeFormatter.ofPattern("dd")
+
+  private def createModel(postMeta: PostMeta, postPath: String) = {
+
+    val date = LocalDate.parse(postMeta.publishDate, DateTimeFormatter.ISO_LOCAL_DATE)
+
+    // TODO in prod, we don't need /assets
+    val imageUrl = s"/assets/images/$postPath/${postMeta.imageName}"
+
+    postMeta.toMap
+      .updated("day", dayFormatter.format(date))
+      .updated("month", monthFormatter.format(date))
+      .updated("tagsList", postMeta.tags.split(",").toSeq.map { tag =>
+        Map("name" -> tag)
+      }.toList)
+      .updated("imageUrl", imageUrl)
+  }
 
   override def templateContext(exchange: HttpServerExchange): TemplateContext = {
     val postPattern(categoryUrlKey, postUrlKey) = exchange.getRequestURI
     val postMeta = PostMetas.metas(categoryUrlKey)(postUrlKey)
 
+    val postPath = s"$categoryUrlKey/${postMeta.publishDate}-$postUrlKey"
+    val model = createModel(postMeta, postPath)
 
-    TemplateContext(templateName = s"/posts/$categoryUrlKey/${postMeta.publishDate}-$postUrlKey",
-      model = postMeta.toMap)
+    TemplateContext(templateName = s"/posts/$postPath",
+      model = model)
   }
 }
 

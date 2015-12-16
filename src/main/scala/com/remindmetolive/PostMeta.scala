@@ -1,31 +1,24 @@
 package com.remindmetolive
 
 import java.io.File
-import java.net.URL
 
-import com.google.common.cache.{Cache, CacheBuilder}
 import com.typesafe.config.ConfigFactory
 import org.slf4j.LoggerFactory
 
-import scala.io.Source
-import scala.collection.immutable.Map
-import scala.collection.immutable.Seq
+import scala.collection.immutable.{Map, Seq}
+import scala.util.Try
 
 /**
   * @author dpersa
   */
 object PostMetas
-//  extends MetaService
 {
   private val logger = LoggerFactory.getLogger(this.getClass)
 
-  private var temp = Map[String, Map[String, PostMeta]]()
-
-  //private val cache: Cache[String, Map[String, Any]] = new CacheBuilder[String, Map[String, Any]]().build()
-
   private def categoryDirs(category: String): Seq[String] = Assets.assetsSubdir(s"templates/posts/$category")
 
-  def init() {
+  def init() = {
+    var temp = Map[String, Map[String, PostMeta]]()
     for (category <- Assets.postDirs) {
       for {
         postFileName <- categoryDirs(category)
@@ -43,7 +36,8 @@ object PostMetas
           keywords = config.getString("keywords"),
           description = config.getString("description"),
           tags = config.getString("tags"),
-          pictureUrl = config.getString("picture_url"),
+          imageName = config.getString("image_name"),
+          categoryImageName = Try(config.getString("category_image_name")).getOrElse(config.getString("image_name")),
           status = config.getString("status"),
           publishDate = config.getString("publish_date"),
           intro = config.getString("intro")
@@ -57,19 +51,16 @@ object PostMetas
         logger.debug(s"Discovered post ${meta}")
       }
     }
+    temp
   }
 
-  init()
-
-  val metas = temp
+  val metas = init()
 
   logger.debug(s"Post Metas: $metas")
-
-  //override def getMetas(key: String): Map[String, Any] = ???
 }
 
 case class PostMeta(key: String, category: String, title: String, author: String,
-                    keywords: String, description: String, tags: String, pictureUrl: String,
+                    keywords: String, description: String, tags: String, imageName: String, categoryImageName: String,
                     status: String, publishDate: String, intro: String) {
   val toMap = Map(
     "key" -> key,
@@ -79,7 +70,8 @@ case class PostMeta(key: String, category: String, title: String, author: String
     "keywords" -> keywords,
     "description" -> description,
     "tags" -> tags,
-    "pictureUrl" -> pictureUrl,
+    "imageName" -> imageName,
+    "categoryImageName" -> categoryImageName,
     "status" -> status,
     "publishDate" -> publishDate,
     "intro" -> intro

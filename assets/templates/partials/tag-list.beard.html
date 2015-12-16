@@ -1,0 +1,7 @@
+{{for tag in tagsList}}
+  {{if tag.isLast}}
+    <a href="">{{ tag.name }}</a>
+  {{else}}
+    <a href="">{{ tag.name }}</a>,&nbsp;
+  {{/if}}
+{{/for}}

@@ -7,9 +7,9 @@ watchify = require('watchify');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 
-gulp.task('default', ['compile-sass', 'compile-scss', 'css', 'js', 'images', 'templates']);
+gulp.task('default', ['compile-sass', 'compile-scss', 'css', 'js', 'images', 'templates', 'post-images']);
 
-gulp.task('watch', ['watch-sass', 'watch-scss']);
+gulp.task('watch', ['watch-sass', 'watch-scss', 'watch-templates', 'watch-post-images']);
 
 gulp.task('watch-sass', function () {
     gulp.watch('assets/css/**/*.sass', ['compile-sass']);
@@ -17,6 +17,14 @@ gulp.task('watch-sass', function () {
 
 gulp.task('watch-scss', function () {
     gulp.watch('assets/css/**/*.scss', ['compile-scss']);
+});
+
+gulp.task('watch-templates', function () {
+    gulp.watch('assets/templates/**', ['templates']);
+});
+
+gulp.task('watch-post-images', function () {
+    gulp.watch('assets/post-images/**', ['post-images']);
 });
 
 gulp.task('compile-sass', function () {
@@ -78,6 +86,13 @@ gulp.task('templates', function () {
           'assets/templates/**'
       ])
       .pipe(gulp.dest("target/assets/templates"))
+});
+
+gulp.task('post-images', function () {
+    gulp.src([
+          'assets/post-images/**'
+      ])
+      .pipe(gulp.dest("target/assets/images"))
 });
 
 gulp.task('images', function () {
