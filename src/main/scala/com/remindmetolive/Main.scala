@@ -27,6 +27,7 @@ object Main extends App {
     .addExactPath("/", new BlockingHandler(IndexTemplateHandler(homePageMetas)))
     .addExactPath("/about", new BlockingHandler(homePageTemplateHandler))
     .addExactPath("/contact", new BlockingHandler(homePageTemplateHandler))
+    .addExactPath("/send-contact", new BlockingHandler(homePageTemplateHandler))
     .addExactPath("/stories", new BlockingHandler(CategoryTemplateHandler))
     .addExactPath("/streets-of-berlin", new BlockingHandler(CategoryTemplateHandler))
     .addExactPath("/cats", new BlockingHandler(CategoryTemplateHandler))
