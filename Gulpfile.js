@@ -7,7 +7,7 @@ watchify = require('watchify');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 
-gulp.task('default', ['compile-sass', 'compile-scss', 'css', 'js', 'images', 'templates', 'post-images']);
+gulp.task('default', ['compile-sass', 'compile-scss', 'css', 'js', 'images', 'templates', 'post-images', 'fontello']);
 
 gulp.task('watch', ['watch-sass', 'watch-scss', 'watch-templates', 'watch-post-images']);
 
@@ -51,7 +51,7 @@ gulp.task('css', function () {
         'assets/css/owl.carousel.css',
         'assets/css/owl.transitions.css',
         'assets/css/animate.min.css',
-        'assets/fontello.css',
+        'assets/css/fontello.css',
         'target/sass/**.css',
         'target/scss/**.css'
     ])
@@ -99,5 +99,12 @@ gulp.task('images', function () {
     gulp.src([
         'assets/images/**'
     ])
+        .pipe(gulp.dest("target/assets"))
+});
+
+gulp.task('fontello', function () {
+    gulp.src([
+            'assets/fonts/fontello/**'
+        ])
         .pipe(gulp.dest("target/assets"))
 });
