@@ -2,8 +2,8 @@
   "name": "gulp-remindmetolive",
   "description": "Gulp Asset Pipeline with Remindmetolive",
   "engines": {
-    "node": "4.1.1",
-    "npm": "3.3.4"
+    "node": "4.4.4",
+    "npm": "2.15.1"
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "watchify": "latest"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-watch": "latest"
   }
 }

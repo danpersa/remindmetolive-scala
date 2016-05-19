@@ -16,7 +16,10 @@ case class PebbleTemplateHandler(val templateName: String, context: Map[String, 
   loader.setSuffix(".beard.html")
   loader.setPrefix("pebble")
 
-  val engine = new PebbleEngine(loader)
+  val engine = new PebbleEngine.Builder()
+    .loader(loader)
+    .build()
+
   val template = engine.getTemplate(templateName)
 
   override def handleRequest(exchange: HttpServerExchange) = {
